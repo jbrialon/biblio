@@ -1,28 +1,39 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <mu-paper :z-depth="1" class="demo-list-wrap">
+      <mu-appbar color="lightBlue" class="appbar">
+        <router-link :to="{ name: 'home' }">
+          Biblio
+        </router-link>
+      </mu-appbar>
+      <router-view/>
+    </mu-paper>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import { mapActions } from 'vuex'
 
 export default {
   name: 'app',
-  components: {
-    HelloWorld
+    methods: {
+    ...mapActions([
+      'getContent'
+    ])
+  },
+  mounted () {
+    this.getContent()
   }
 }
 </script>
 
 <style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+}
+
+.appbar a {
+  color:white;
 }
 </style>
