@@ -1,7 +1,7 @@
 <template>
   <div class="about">
     <mu-list textline="two-line">
-      <mu-sub-header>{{ this.$route.params.title }}</mu-sub-header>
+      <mu-sub-header>{{ this.$route.params.id }}</mu-sub-header>
       <mu-list-item avatar :ripple="false" button v-for="(volume, index) in serie" :key="index">
         <mu-list-item-action>
           <img :src="volume.imageLinks.smallThumbnail">
@@ -27,8 +27,8 @@
 </template>
 
 <script>
-import { pickBy } from 'lodash'
 
+import { compact } from 'lodash'
 export default {
   name: 'About',
   computed: {
@@ -36,7 +36,11 @@ export default {
       return this.$store.getters.volumes
     },
     serie () {
-      return pickBy(this.volumes, ({ title }) => title === this.$route.params.title)
+      return compact(this.volumes.map((volume) => {
+        if (volume.seriesInfo && volume.seriesInfo.volumeSeries[0].seriesId === this.$route.params.id) {
+          return volume
+        }
+      }))
     }
   }
 }

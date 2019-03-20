@@ -4,9 +4,13 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 import axios from 'axios'
-import { uniqBy } from 'lodash'
+import { uniqBy, compact } from 'lodash'
 
 const id = [
+  'nc3oCwAAQBAJ',
+  'krYPHmNk6TwC',
+  's1DlCwAAQBAJ',
+  'Xf0qAwAAQBAJ',
   'zsBDDwAAQBAJ',
   '1MBDDwAAQBAJ',
   'zMBDDwAAQBAJ',
@@ -16,18 +20,38 @@ const id = [
   'ahtrDwAAQBAJ',
   'lrpwDwAAQBAJ',
   '1-2DDwAAQBAJ',
-  'Ank5DwAAQBAJ'
+  'Ank5DwAAQBAJ',
+  '9c2gAQAAQBAJ',
+  'O_i8AwAAQBAJ',
+  'sy0qBgAAQBAJ',
+  'ED1oDAAAQBAJ',
+  'DaZ_DAAAQBAJ',
+  '7_V7DQAAQBAJ',
+  'RaeuAQAAQBAJ',
+  'nbgjaiE-RKgC',
+  'chBz_If57kQC',
+  'xnwVBgAAQBAJ',
+  'nja5dVitkPwC',
+  'RV7PAQAAQBAJ',
+  'l0EEDAAAQBAJ',
+  'FtAwBgAAQBAJ',
+  'QN4wBgAAQBAJ',
+  'AMZlDQAAQBAJ'
 ]
 let promises = []
 let googleKey = 'AIzaSyCNQvQc3ty4yUjwngKsgo1aViGhJsess7c'
 
 export default new Vuex.Store({
   state: {
-    volumes: []
+    volumes: [],
+    error: ''
   },
   mutations: {
     pushContent (state, volume) {
       state.volumes.push(volume)
+    },
+    setError (state, message) {
+      state.error = message
     }
   },
   actions: {
@@ -35,11 +59,16 @@ export default new Vuex.Store({
       for (var i = 0; i < id.length; i++){
         promises.push(axios.get(`https://www.googleapis.com/books/v1/volumes/${id[i]}?key=${googleKey}`))
       }
-      axios.all(promises).then((responses) => {
-        responses.forEach((response) => {
-          commit('pushContent', response.data.volumeInfo)
+      axios.all(promises)
+        .then((responses) => {
+          responses.forEach((response) => {
+            commit('pushContent', response.data.volumeInfo)
+          })
+        }).catch((error) => {
+          if (error.response) {
+            commit('setError', error.response.data.error.message)
+          }
         })
-      })
     }
   },
   getters: {
@@ -47,9 +76,11 @@ export default new Vuex.Store({
       return state.volumes
     },
     series: state => {
-      return uniqBy(state.volumes.map((volume) => {
-        return volume.title
-      }))
+      return compact(uniqBy(state.volumes.map((volume) => {
+        if (volume.seriesInfo) {
+          return volume.seriesInfo.volumeSeries[0].seriesId
+        }
+      })))
     }
   }
 })
