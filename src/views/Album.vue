@@ -2,7 +2,7 @@
   <div class="album">
       <mu-card>
         <mu-card-media :title="album.title" :sub-title="album.subtitle">
-          <img :src="album.imageLinks.small">
+          <img :src="album.imageLinks.medium">
         </mu-card-media>
         <mu-card-text v-html="album.description">
         </mu-card-text>
