@@ -2,8 +2,8 @@
   <div class="about">
     <mu-list textline="two-line">
       <mu-sub-header>{{ title }}</mu-sub-header>
-      <!-- <router-link :to="{ name: 'album', params: { title: volume.subtitle }}" v-for="(volume, index) in serie" :key="index"> -->
-        <mu-list-item avatar :ripple="false" button v-for="(volume, index) in serie" :key="index">
+      <router-link :to="{ name: 'album', params: { isbn: volume.industryIdentifiers[0].identifier }}" v-for="(volume, index) in serie" :key="index">
+        <mu-list-item avatar :ripple="false" button>
           <mu-list-item-action>
             <img :src="volume.imageLinks.smallThumbnail">
           </mu-list-item-action>
@@ -23,7 +23,7 @@
             </mu-list-item-sub-title>
           </mu-list-item-content>
         </mu-list-item>
-      <!-- </router-link> -->
+      </router-link>
     </mu-list>
   </div>
 </template>

@@ -1,14 +1,17 @@
 <template>
   <div class="album">
-      {{ this.$route.params.title }}
-      <p v-html="album.description ">
-      </p>
+      <mu-card>
+        <mu-card-media :title="album.title" :sub-title="album.subtitle">
+          <img :src="album.imageLinks.small">
+        </mu-card-media>
+        <mu-card-text v-html="album.description">
+        </mu-card-text>
+      </mu-card>
   </div>
 </template>
 
 <script>
-import { pickBy, find } from 'lodash'
-
+import { find } from 'lodash'
 export default {
   name: 'Album',
   computed: {
@@ -16,7 +19,11 @@ export default {
       return this.$store.getters.volumes
     },
     album () {
-      return find(pickBy(this.volumes, ({ subtitle }) => subtitle === this.$route.params.title), 'title')
+      return find(this.volumes.filter((volume) => {
+        if (volume.industryIdentifiers[0].identifier === this.$route.params.isbn) {
+          return volume
+        }
+      }), 'title')
     }
   }
 }
