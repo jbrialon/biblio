@@ -1,5 +1,7 @@
 # biblio
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/f60ff1e7-0343-4e52-8b58-019e17fa301e/deploy-status)](https://app.netlify.com/sites/biblio8/deploys)
+
 ## Project setup
 ```
 npm install
