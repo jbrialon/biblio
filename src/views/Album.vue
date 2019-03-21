@@ -1,11 +1,13 @@
 <template>
   <div class="album">
-
+      {{ this.$route.params.title }}
+      <p v-html="album.description ">
+      </p>
   </div>
 </template>
 
 <script>
-import { pickBy } from 'lodash'
+import { pickBy, find } from 'lodash'
 
 export default {
   name: 'Album',
@@ -13,8 +15,8 @@ export default {
     volumes () {
       return this.$store.getters.volumes
     },
-    serie () {
-      return pickBy(this.volumes, ({ title }) => title === this.$route.params.title)
+    album () {
+      return find(pickBy(this.volumes, ({ subtitle }) => subtitle === this.$route.params.title), 'title')
     }
   }
 }

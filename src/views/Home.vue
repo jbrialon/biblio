@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <mu-list textline="two-line">
+    <mu-list textline="two-line" v-if="!error">
       <router-link :to="{ name: 'about', params: { id: serie }}" v-for="(serie, index) in series" :key="index">
         <mu-list-item avatar button :ripple="false">
           <mu-list-item-action>
@@ -14,6 +14,10 @@
         </mu-list-item>
       </router-link>
     </mu-list>
+    <mu-alert color="error" v-if="error" class="error">
+      <mu-icon left value="warning"></mu-icon>
+     {{ error }}
+    </mu-alert>
   </div>
 </template>
 
@@ -36,7 +40,17 @@ export default {
     },
     series () {
       return this.$store.getters.series
+    },
+    error () {
+      return this.$store.getters.error
     }
   }
 }
 </script>
+
+<style>
+.error {
+  margin: 30px;
+  width: calc(100% - 60px);
+}
+</style>

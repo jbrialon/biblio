@@ -81,6 +81,9 @@ export default new Vuex.Store({
           return volume.seriesInfo.volumeSeries[0].seriesId
         }
       })))
-    }
+    },
+    error: state => {
+      return state.error
+    },
   }
 })
