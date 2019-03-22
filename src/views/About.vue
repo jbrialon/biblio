@@ -18,7 +18,7 @@
             </mu-list-item-title>
             <mu-list-item-sub-title>
               <div>
-                Tome {{ volume.seriesInfo.bookDisplayNumber }}
+                Vol {{ volume.seriesInfo.bookDisplayNumber }}
               </div>
               <div v-for="(author, index) in volume.authors" :key="index">
                 {{ author }}
@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import { compact, orderBy } from 'lodash'
+import { compact, sortBy } from 'lodash'
 export default {
   name: 'About',
   computed: {
@@ -40,11 +40,13 @@ export default {
       return this.$store.getters.volumes
     },
     serie () {
-      return orderBy(compact(this.volumes.map((volume) => {
+      return sortBy(compact(this.volumes.map((volume) => {
         if (volume.seriesInfo && volume.seriesInfo.volumeSeries[0].seriesId === this.$route.params.id) {
           return volume
         }
-      })), ['seriesInfo.bookDisplayNumber'], ['asc'])
+      })), (volume) => {
+        return parseInt(volume.seriesInfo.bookDisplayNumber, 10)
+      })
     },
     title () {
       return this.serie ? this.serie[0].title.split('-')[0].split('(')[0] : ''
