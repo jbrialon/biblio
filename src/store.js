@@ -39,7 +39,7 @@ const id = [
   'AMZlDQAAQBAJ'
 ]
 let promises = []
-let googleKey = 'AIzaSyCNQvQc3ty4yUjwngKsgo1aViGhJsess7c'
+let googleKey = API_KEY
 
 export default new Vuex.Store({
   state: {
