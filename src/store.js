@@ -40,7 +40,7 @@ const id = [
 ]
 let promises = []
 const { API_KEY } = process.env
-console.log(FAKE_TOKEN)
+console.log(API_KEY)
 
 export default new Vuex.Store({
   state: {
