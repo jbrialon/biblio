@@ -39,7 +39,8 @@ const id = [
   'AMZlDQAAQBAJ'
 ]
 let promises = []
-let googleKey = process.env.API_KEY
+const { API_KEY } = process.env
+console.log(FAKE_TOKEN)
 
 export default new Vuex.Store({
   state: {
@@ -57,7 +58,7 @@ export default new Vuex.Store({
   actions: {
     getContent ({ commit }) {
       for (var i = 0; i < id.length; i++){
-        promises.push(axios.get(`https://www.googleapis.com/books/v1/volumes/${id[i]}?key=${googleKey}`))
+        promises.push(axios.get(`https://www.googleapis.com/books/v1/volumes/${id[i]}?key=${API_KEY}`))
       }
       axios.all(promises)
         .then((responses) => {
