@@ -31,7 +31,7 @@
                 </mu-avatar>
               </mu-list-item-action>
               <mu-list-item-content>
-                <mu-list-item-title>{{ volume.title }}</mu-list-item-title>
+                <mu-list-item-title>{{ trimTitle(volume.title) }}</mu-list-item-title>
                 <mu-list-item-sub-title v-if="volume.subtitle">{{ volume.subtitle }}</mu-list-item-sub-title>
               </mu-list-item-content>
             </mu-list-item>
@@ -57,11 +57,11 @@ export default {
   },
   methods: {
     getTitlePerSerieId (id) {
-      return find(pickBy(this.volumes, (volume) => {
+      return this.trimTitle(find(pickBy(this.volumes, (volume) => {
         if (volume.seriesInfo) {
           return volume.seriesInfo.volumeSeries[0].seriesId === id
         }
-      }), 'title').title.split('-')[0].split('(')[0].split('#')[0]
+      }), 'title').title)
     },
     getAvatar (id) {
       return find(pickBy(this.volumes, (volume) => {
@@ -69,6 +69,9 @@ export default {
           return volume.seriesInfo.volumeSeries[0].seriesId === id
         }
       }), 'title').imageLinks.smallThumbnail
+    },
+    trimTitle (title) {
+      return title.split('-')[0].split('(')[0].split('#')[0]
     }
   },
   computed: {
