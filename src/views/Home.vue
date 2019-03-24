@@ -61,7 +61,7 @@ export default {
         if (volume.seriesInfo) {
           return volume.seriesInfo.volumeSeries[0].seriesId === id
         }
-      }), 'title').title.split('-')[0].split('(')[0]
+      }), 'title').title.split('-')[0].split('(')[0].split('#')[0]
     },
     getAvatar (id) {
       return find(pickBy(this.volumes, (volume) => {

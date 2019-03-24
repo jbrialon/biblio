@@ -1,10 +1,14 @@
 <template>
   <div id="app">
     <mu-paper :z-depth="1" class="demo-list-wrap">
-      <mu-appbar color="lightBlue" class="appbar">
+      <mu-appbar color="primary" class="appbar">
         <router-link :to="{ name: 'home' }">
           Biblio
         </router-link>
+        <mu-button flat slot="right" @click="random()">
+          <mu-icon value="help"></mu-icon>
+          suggestion
+        </mu-button>
       </mu-appbar>
       <router-view/>
     </mu-paper>
@@ -13,13 +17,23 @@
 
 <script>
 import { mapActions } from 'vuex'
-
+import { sample } from 'lodash'
 export default {
   name: 'app',
     methods: {
     ...mapActions([
       'getContent'
-    ])
+    ]),
+    random () {
+      const volume = sample(this.volumes)
+      const randomVolume = volume ? volume.industryIdentifiers[0].identifier : null
+      this.$router.push({ name: 'album', params: { isbn: randomVolume } })
+    }
+  },
+  computed: {
+    volumes () {
+      return this.$store.getters.volumes
+    }
   },
   mounted () {
     this.getContent()
@@ -35,5 +49,8 @@ export default {
 
 .appbar a {
   color:white;
+}
+.appbar .mu-icon {
+  margin-right:5px;
 }
 </style>
