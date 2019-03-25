@@ -25,9 +25,9 @@ export default new Router({
       path: '/album/:isbn',
       name: 'album',
       // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
+      // this generates a separate chunk (album.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/Album.vue')
+      component: () => import(/* webpackChunkName: "album" */ './views/Album.vue')
     }
   ]
 })
