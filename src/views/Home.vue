@@ -89,10 +89,6 @@ export default {
 </script>
 
 <style>
-.error {
-  margin: 30px;
-  width: calc(100% - 60px);
-}
 .mu-tabs-inverse,
 .mu-tab {
   background:transparent;

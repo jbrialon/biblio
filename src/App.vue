@@ -2,9 +2,11 @@
   <div id="app">
     <mu-paper :z-depth="1" class="demo-list-wrap">
       <mu-appbar color="primary" class="appbar">
-        <router-link :to="{ name: 'home' }">
-          Biblio
-        </router-link>
+        <mu-tooltip :content="tooltipContent">
+          <router-link :to="{ name: 'home' }">
+            Biblio 8
+          </router-link>
+        </mu-tooltip>
         <mu-button flat slot="right" @click="random()">
           <mu-icon value="help"></mu-icon>
           suggestion
@@ -33,6 +35,9 @@ export default {
   computed: {
     volumes () {
       return this.$store.getters.volumes
+    },
+    tooltipContent () {
+      return `Nombre d'albums : ${this.$store.getters.volumes.length}`
     }
   },
   mounted () {
