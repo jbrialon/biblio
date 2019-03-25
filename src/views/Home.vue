@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <mu-container>
+    <mu-container v-if="volumes">
       <mu-tabs :value.sync="activeTab" inverse text-color="rgba(0, 0, 0, .54)" full-width>
         <mu-tab>Collections</mu-tab>
         <mu-tab>Albums</mu-tab>

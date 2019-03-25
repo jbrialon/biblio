@@ -1,6 +1,6 @@
 <template>
   <div class="about">
-    <mu-list textline="two-line">
+    <mu-list textline="two-line" v-if="volumes">
       <mu-sub-header>{{ title }}</mu-sub-header>
       <router-link :to="{ name: 'album', params: { isbn: volume.industryIdentifiers[0].identifier }}" v-for="(volume, index) in serie" :key="index">
         <mu-list-item avatar :ripple="false" button>

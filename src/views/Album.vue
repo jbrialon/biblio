@@ -1,6 +1,6 @@
 <template>
   <div class="album">
-      <mu-card>
+      <mu-card v-if="volumes">
         <mu-card-media :title="album.title" :sub-title="album.subtitle">
           <img :src="album.imageLinks.medium">
         </mu-card-media>
