@@ -17,7 +17,7 @@
               </template>
             </mu-list-item-title>
             <mu-list-item-sub-title>
-              <div>
+              <div v-if="volume.seriesInfo.bookDisplayNumber">
                 Vol {{ volume.seriesInfo.bookDisplayNumber }}
               </div>
               <div v-for="(author, index) in volume.authors" :key="index">

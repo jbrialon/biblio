@@ -6,7 +6,7 @@
         <mu-tab>Albums</mu-tab>
       </mu-tabs>
       <div v-if="activeTab === 0">
-        <mu-list textline="two-line" v-if="!error">
+        <mu-list textline="two-line">
           <router-link :to="{ name: 'about', params: { id: serie }}" v-for="(serie, index) in series" :key="index">
             <mu-list-item avatar button :ripple="false">
               <mu-list-item-action>
@@ -22,7 +22,7 @@
         </mu-list>
       </div>
       <div class="demo-text" v-if="activeTab === 1">
-        <mu-list textline="two-line" v-if="!error">
+        <mu-list textline="two-line">
           <router-link :to="{ name: 'album', params: { isbn: volume.industryIdentifiers[0].identifier }}" v-for="(volume, index) in volumesWithoutSerie" :key="index">
             <mu-list-item avatar :ripple="false" button>
               <mu-list-item-action>
@@ -39,10 +39,6 @@
         </mu-list>
       </div>
     </mu-container>
-    <mu-alert color="error" v-if="error" class="error">
-      <mu-icon left value="warning"></mu-icon>
-     {{ error }}
-    </mu-alert>
   </div>
 </template>
 
@@ -87,9 +83,6 @@ export default {
     },
     series () {
       return this.$store.getters.series
-    },
-    error () {
-      return this.$store.getters.error
     }
   }
 }

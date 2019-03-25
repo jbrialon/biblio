@@ -5,6 +5,7 @@ Vue.use(Vuex)
 
 import axios from 'axios'
 import { uniqBy, compact } from 'lodash'
+import data from './data/data.json'
 
 const id = [
   'nc3oCwAAQBAJ',
@@ -68,15 +69,14 @@ let googleKey = 'AIzaSyCNQvQc3ty4yUjwngKsgo1aViGhJsess7c'
 
 export default new Vuex.Store({
   state: {
-    volumes: [],
-    error: ''
+    volumes: []
   },
   mutations: {
     pushContent (state, volume) {
       state.volumes.push(volume)
     },
-    setError (state, message) {
-      state.error = message
+    pushContentFromJson (state, json) {
+      state.volumes = json
     }
   },
   actions: {
@@ -90,8 +90,8 @@ export default new Vuex.Store({
             commit('pushContent', response.data.volumeInfo)
           })
         }).catch((error) => {
-          if (error.response) {
-            commit('setError', error.response.data.error.message)
+          if (error) {
+            commit('pushContentFromJson', data)
           }
         })
     }
@@ -106,9 +106,6 @@ export default new Vuex.Store({
           return volume.seriesInfo.volumeSeries[0].seriesId
         }
       })))
-    },
-    error: state => {
-      return state.error
-    },
+    }
   }
 })
