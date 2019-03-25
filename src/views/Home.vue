@@ -7,35 +7,31 @@
       </mu-tabs>
       <div v-if="activeTab === 0">
         <mu-list textline="two-line">
-          <router-link :to="{ name: 'about', params: { id: serie }}" v-for="(serie, index) in series" :key="index">
-            <mu-list-item avatar button :ripple="false">
-              <mu-list-item-action>
-                <mu-avatar>
-                  <img :src="getAvatar(serie)">
-                </mu-avatar>
-              </mu-list-item-action>
-              <mu-list-item-content>
-                <mu-list-item-title>{{ getTitlePerSerieId(serie) }}</mu-list-item-title>
-              </mu-list-item-content>
-            </mu-list-item>
-          </router-link>
+          <mu-list-item avatar button :ripple="true" :to="{ name: 'about', params: { id: serie }}" v-for="(serie, index) in series" :key="index">
+            <mu-list-item-action>
+              <mu-avatar>
+                <img :src="getAvatar(serie)">
+              </mu-avatar>
+            </mu-list-item-action>
+            <mu-list-item-content>
+              <mu-list-item-title>{{ getTitlePerSerieId(serie) }}</mu-list-item-title>
+            </mu-list-item-content>
+          </mu-list-item>
         </mu-list>
       </div>
       <div class="demo-text" v-if="activeTab === 1">
         <mu-list textline="two-line">
-          <router-link :to="{ name: 'album', params: { isbn: volume.industryIdentifiers[0].identifier }}" v-for="(volume, index) in volumesWithoutSerie" :key="index">
-            <mu-list-item avatar :ripple="false" button>
-              <mu-list-item-action>
-                <mu-avatar>
-                  <img :src="volume.imageLinks.smallThumbnail">
-                </mu-avatar>
-              </mu-list-item-action>
-              <mu-list-item-content>
-                <mu-list-item-title>{{ trimTitle(volume.title) }}</mu-list-item-title>
-                <mu-list-item-sub-title v-if="volume.subtitle">{{ volume.subtitle }}</mu-list-item-sub-title>
-              </mu-list-item-content>
-            </mu-list-item>
-          </router-link>
+          <mu-list-item avatar :ripple="true" button :to="{ name: 'album', params: { isbn: volume.industryIdentifiers[0].identifier }}" v-for="(volume, index) in volumesWithoutSerie" :key="index">
+            <mu-list-item-action>
+              <mu-avatar>
+                <img :src="volume.imageLinks.smallThumbnail">
+              </mu-avatar>
+            </mu-list-item-action>
+            <mu-list-item-content>
+              <mu-list-item-title>{{ trimTitle(volume.title) }}</mu-list-item-title>
+              <mu-list-item-sub-title v-if="volume.subtitle">{{ volume.subtitle }}</mu-list-item-sub-title>
+            </mu-list-item-content>
+          </mu-list-item>
         </mu-list>
       </div>
     </mu-container>
