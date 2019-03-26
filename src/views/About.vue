@@ -2,7 +2,14 @@
   <div class="about">
     <mu-sub-header>{{ title }}</mu-sub-header>
     <mu-list textline="two-line" v-if="volumes">
-      <mu-list-item avatar :ripple="false" button :to="{ name: 'album', params: { isbn: volume.industryIdentifiers[0].identifier }}" v-for="(volume, index) in serie" :key="index">
+      <mu-list-item 
+        avatar
+        :ripple="false"
+        button
+        :to="{ name: 'album', params: { isbn: volume.industryIdentifiers[0].identifier }}"
+        v-for="(volume, index) in serie"
+        :key="index"
+      >
         <mu-list-item-action>
           <img :src="volume.imageLinks.smallThumbnail">
         </mu-list-item-action>

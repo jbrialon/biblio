@@ -62,7 +62,9 @@ const id = [
   'TNYcDQAAQBAJ',
   'CyOrCwAAQBAJ',
   'CK1dDwAAQBAJ',
-  'St8kBQAAQBAJ'
+  'St8kBQAAQBAJ',
+  'p2rTDgAAQBAJ',
+  'mbPuDQAAQBAJ'
 ]
 let promises = []
 let googleKey = 'AIzaSyCNQvQc3ty4yUjwngKsgo1aViGhJsess7c'
