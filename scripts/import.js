@@ -1,8 +1,8 @@
 var fs = require('fs');
 var axios = require('axios');
-var instance = axios.create({headers:{'Referer': 'https://biblio8.netlify.com'}})
+var instance = axios.create({headers:{'Referer': 'https://biblio8.netlify.com'}});
 
-var volumes = []
+var volumes = [];
 var id = [
   'nc3oCwAAQBAJ',
   'krYPHmNk6TwC',
@@ -60,10 +60,11 @@ var id = [
   'CK1dDwAAQBAJ',
   'St8kBQAAQBAJ',
   'p2rTDgAAQBAJ',
-  'mbPuDQAAQBAJ'
-]
-var promises = []
-var googleKey = 'AIzaSyCNQvQc3ty4yUjwngKsgo1aViGhJsess7c'
+  'mbPuDQAAQBAJ',
+  '4MBDDwAAQBAJ'
+];
+var promises = [];
+var googleKey = 'AIzaSyCNQvQc3ty4yUjwngKsgo1aViGhJsess7c';
 
 for (var i = 0; i < id.length; i++){
   promises.push(instance.get(`https://www.googleapis.com/books/v1/volumes/${id[i]}?key=${googleKey}`));
