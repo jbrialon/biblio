@@ -61,7 +61,10 @@ var id = [
   'St8kBQAAQBAJ',
   'p2rTDgAAQBAJ',
   'mbPuDQAAQBAJ',
-  '4MBDDwAAQBAJ'
+  '4MBDDwAAQBAJ',
+  'aBtrDwAAQBAJ',
+  '3sBDDwAAQBAJ',
+  '3MBDDwAAQBAJ'
 ];
 var promises = [];
 var googleKey = 'AIzaSyCNQvQc3ty4yUjwngKsgo1aViGhJsess7c';
