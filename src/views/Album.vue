@@ -30,15 +30,7 @@ export default {
 </script>
 
 <style>
-.about .mu-list-two-line .mu-item {
-  height:200px;
-}
-
-.about .mu-list-two-line .mu-item img {
-  width:100%;
-}
-
-.about .mu-list-two-line .mu-item .mu-item-content {
-  padding-left:10px;
+.album .mu-card-media {
+  min-height: 104px;
 }
 </style>
